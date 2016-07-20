@@ -1,0 +1,36 @@
+package Details;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test {
+
+	public static void main(String[] args) {
+		final String fileName = "C:/Users/sucmisra/SwingExcercise/Test.txt";
+		List<String> amountDetails=new ArrayList<String>();
+		StringBuffer sBuf = new StringBuffer();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
+	        String line;
+	        
+	        while((line = br.readLine()) != null) {
+	        	amountDetails.add(line);
+	        	if(amountDetails.size()>2)
+	        		break;
+	        }
+	        br.close();
+		} catch (IOException e) {
+			System.out.println("readFromFile problem:");
+			e.printStackTrace();
+		}
+		System.out.println(amountDetails);
+		
+		
+		System.out.println(amountDetails.size());
+	
+	}
+
+}

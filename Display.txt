@@ -1,0 +1,725 @@
+package display;
+
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
+
+import javax.swing.Popup;
+
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import jxl.write.WritableWorkbook;
+
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.swt.custom.TableCursor;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.TreeColumn;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.widgets.CoolBar;
+import org.eclipse.swt.widgets.CoolItem;
+import org.eclipse.swt.custom.CLabel;
+
+public class WindowDisplay {
+	private Text text;
+	private Text text_1;
+	private Text text_2;
+	private Text text_3;
+	private Text text_4;
+	private Text text_5;
+	private Text text_6;
+	private Text text_7;
+	private Text text_8;
+	private Text text_9;
+	private Table table;
+	static  int count;
+	
+Scanner sc=new Scanner(System.in);
+private Text text_12;
+private Text text_13;
+private Text text_14;
+private Text text_16;
+private Text text_15;
+	public void window() throws IOException, BiffException{
+		Display display=new Display();
+		final Shell shell=new Shell(display);
+		shell.setSize(574, 470);
+		shell.setText("Orion SWT Excercise");
+		
+		final Menu menu = new Menu(shell, SWT.BAR);
+		shell.setMenuBar(menu);
+		
+		MenuItem mntmNewItem = new MenuItem(menu, SWT.NONE);
+		mntmNewItem.setText("File");
+		
+		MenuItem mntmNewItem_1 = new MenuItem(menu, SWT.NONE);
+		mntmNewItem_1.setText("Edit");
+		
+		MenuItem mntmHelp = new MenuItem(menu, SWT.CHECK);
+		mntmHelp.setText("Help");
+		
+		Label lblNewLabel = new Label(shell, SWT.BORDER);
+		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblNewLabel.setAlignment(SWT.CENTER);
+		lblNewLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_NORMAL_SHADOW));
+		lblNewLabel.setBounds(0, 0, 115, 21);
+		lblNewLabel.setText("Account Number");
+		
+		text = new Text(shell, SWT.BORDER);
+		text.setBounds(116, 0, 181, 21);
+		
+		Label lblNewLabel_1 = new Label(shell, SWT.NONE);
+		lblNewLabel_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
+		lblNewLabel_1.setBounds(298, 0, 123, 20);
+		
+		Button btnNewButton = new Button(shell, SWT.NONE);
+		btnNewButton.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btnNewButton.setBounds(423, 0, 66, 20);
+		btnNewButton.setText("LIR");
+		
+		Button btnNewButton_1 = new Button(shell, SWT.NONE);
+		btnNewButton_1.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btnNewButton_1.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+			}
+		});
+		btnNewButton_1.setBounds(489, 0, 66, 20);
+		btnNewButton_1.setText("Devices");
+		
+		TabFolder tabFolder = new TabFolder(shell, SWT.NONE);
+		tabFolder.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		tabFolder.setBounds(0, 23, 555, 379);
+		
+		TabItem tbtmCardmembers = new TabItem(tabFolder, SWT.NONE);
+		tbtmCardmembers.setText("CardMembers");
+		
+		final Composite composite = new Composite(tabFolder, SWT.BORDER);
+		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
+		tbtmCardmembers.setControl(composite);
+		
+		Group grpMiscInformation = new Group(composite, SWT.NONE);
+		grpMiscInformation.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		grpMiscInformation.setText("Misc Information");
+		grpMiscInformation.setBounds(384, 10, 153, 123);
+		
+		Label lblEmail = new Label(grpMiscInformation, SWT.NONE);
+		lblEmail.setBounds(10, 38, 38, 15);
+		lblEmail.setText("Email");
+		
+		text_1 = new Text(grpMiscInformation, SWT.BORDER);
+		text_1.setBounds(52, 38, 91, 21);
+		
+		Label lblPreference = new Label(grpMiscInformation, SWT.NONE);
+		lblPreference.setBounds(10, 65, 69, 15);
+		lblPreference.setText("Preference");
+		
+		Button btnEmail = new Button(grpMiscInformation, SWT.CHECK);
+		btnEmail.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+			}
+		});
+		btnEmail.setBounds(10, 86, 56, 16);
+		btnEmail.setText("Email");
+		
+		Button btnPhone = new Button(grpMiscInformation, SWT.CHECK);
+		btnPhone.setBounds(72, 86, 56, 16);
+		btnPhone.setText("Phone");
+		
+		Group grpPersonalInformation = new Group(composite, SWT.NONE);
+		grpPersonalInformation.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		grpPersonalInformation.setText("Personal Information");
+		grpPersonalInformation.setBounds(287, 139, 250, 168);
+		
+		Label lblMmn = new Label(grpPersonalInformation, SWT.NONE);
+		lblMmn.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblMmn.setText("MMN");
+		lblMmn.setAlignment(SWT.CENTER);
+		lblMmn.setBounds(20, 26, 57, 20);
+		
+		Label lblDob = new Label(grpPersonalInformation, SWT.NONE);
+		lblDob.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblDob.setText("DOB");
+		lblDob.setAlignment(SWT.CENTER);
+		lblDob.setBounds(20, 52, 57, 20);
+		
+		Label lblSsn = new Label(grpPersonalInformation, SWT.NONE);
+		lblSsn.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblSsn.setText("SSN");
+		lblSsn.setAlignment(SWT.CENTER);
+		lblSsn.setBounds(20, 81, 57, 20);
+		
+		Label lblPhone = new Label(grpPersonalInformation, SWT.NONE);
+		lblPhone.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblPhone.setText("Phone");
+		lblPhone.setAlignment(SWT.CENTER);
+		lblPhone.setBounds(20, 107, 57, 20);
+		
+		text_6 = new Text(grpPersonalInformation, SWT.BORDER);
+		text_6.setBounds(88, 23, 119, 21);
+		
+		text_7 = new Text(grpPersonalInformation, SWT.BORDER);
+		text_7.setBounds(88, 51, 119, 21);
+		
+		text_8 = new Text(grpPersonalInformation, SWT.BORDER);
+		text_8.setBounds(88, 78, 119, 21);
+		
+		text_9 = new Text(grpPersonalInformation, SWT.BORDER);
+		text_9.setBounds(88, 104, 119, 21);
+		
+		Group grpPhysicalAddress = new Group(composite, SWT.NONE);
+		grpPhysicalAddress.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		grpPhysicalAddress.setText("Physical Address");
+		grpPhysicalAddress.setBounds(10, 139, 271, 168);
+		
+		Label lblStreet = new Label(grpPhysicalAddress, SWT.NONE);
+		lblStreet.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblStreet.setAlignment(SWT.CENTER);
+		lblStreet.setBounds(10, 25, 57, 20);
+		lblStreet.setText("Street");
+		
+		Label lblCity = new Label(grpPhysicalAddress, SWT.NONE);
+		lblCity.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblCity.setText("City");
+		lblCity.setAlignment(SWT.CENTER);
+		lblCity.setBounds(10, 55, 57, 20);
+		
+		Label lblZip = new Label(grpPhysicalAddress, SWT.NONE);
+		lblZip.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblZip.setText("ZIP");
+		lblZip.setAlignment(SWT.CENTER);
+		lblZip.setBounds(10, 84, 57, 20);
+		
+		Label lblState = new Label(grpPhysicalAddress, SWT.NONE);
+		lblState.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblState.setText("State");
+		lblState.setAlignment(SWT.CENTER);
+		lblState.setBounds(10, 113, 57, 20);
+		
+		text_2 = new Text(grpPhysicalAddress, SWT.BORDER);
+		text_2.setBounds(73, 22, 119, 21);
+		
+		text_3 = new Text(grpPhysicalAddress, SWT.BORDER);
+		text_3.setBounds(73, 54, 119, 21);
+		
+		text_4 = new Text(grpPhysicalAddress, SWT.BORDER);
+		text_4.setBounds(73, 84, 119, 21);
+		
+		text_5 = new Text(grpPhysicalAddress, SWT.BORDER);
+		text_5.setBounds(73, 112, 119, 21);
+		
+		Composite composite_1 = new Composite(composite, SWT.NONE);
+		composite_1.setBounds(10, 312, 523, 35);
+		
+		Button btnNewButton_2 = new Button(composite_1, SWT.NONE);
+		btnNewButton_2.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD | SWT.ITALIC));
+		btnNewButton_2.setBounds(197, 0, 75, 35);
+		btnNewButton_2.setText("Update");
+		/********Modify Here **************/
+		/*btnNewButton_2.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				
+				System.out.println("I am update");
+				String temp_fname;
+				String temp_lname;
+			}
+		});*/
+		
+		
+		
+		Button btnCancel = new Button(composite_1, SWT.NONE);
+		btnCancel.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				
+				shell.close();
+			}
+		});
+		btnCancel.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD | SWT.ITALIC));
+		btnCancel.setText("Cancel");
+		btnCancel.setBounds(278, 0, 75, 35);
+		
+		
+		
+		table = new Table(composite, SWT.BORDER | SWT.FULL_SELECTION);
+		table.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		table.setBounds(10, 10, 368, 123);
+		
+		TableColumn tblclmnNewColumn = new TableColumn(table, SWT.NONE);
+		tblclmnNewColumn.setWidth(120);
+		tblclmnNewColumn.setText("FirstName");
+		
+		TableColumn tblclmnNewColumn_1 = new TableColumn(table, SWT.NONE);
+		tblclmnNewColumn_1.setWidth(120);
+		tblclmnNewColumn_1.setText("Last Name");
+		
+		TableColumn tblclmnNewColumn_2 = new TableColumn(table, SWT.NONE);
+		tblclmnNewColumn_2.setWidth(114);
+		tblclmnNewColumn_2.setText("Type");
+		
+		/*TableItem tableItem = new TableItem(table, SWT.NONE);
+		tableItem.setText("New TableItem");*/
+		
+		
+		
+		
+		String FilePath = "Book1.xls";
+        FileInputStream fs = new FileInputStream(FilePath);
+      Workbook wb = Workbook.getWorkbook(fs);
+
+      // TO get the access to the sheet
+    final Sheet sh = wb.getSheet("Sheet1");
+
+    
+    
+    
+          // To get the number of rows present in sheet
+        int totalNoOfRows = sh.getRows();
+
+      // To get the number of columns present in sheet
+         int totalNoOfCols = sh.getColumns();
+         count=0;
+        
+    for ( int row= 0; row < totalNoOfRows; row++) {
+ 
+          
+                 System.out.println("before"+count);
+                   TableItem tableItem = new TableItem(table, SWT.NONE);
+        			
+        			tableItem.setText(0,sh.getCell(1, count).getContents());
+        			tableItem.setText(1,sh.getCell(2, count).getContents());
+        			tableItem.setText(2,sh.getCell(3, count).getContents());
+        			count++;
+        			System.out.println("after"+count);
+                
+   
+        			
+        		  
+        		 //   bn.setMenu(popupMenu);
+               
+ //   }
+        			
+        			table.addListener(SWT.Selection, new Listener() {
+      			      public void handleEvent(Event e) {
+      			      
+      			     //   TableItem[] selection = table.getSelection();
+      			
+      			        
+      			        System.out.println(table.getSelectionIndex());
+      			        /* if(table.getSelectionIndex()==row){
+      			        	 
+      			        	 
+      			        	 
+      			        	
+      			        	 
+      			        	 
+      			         }
+      			     */
+      			        int x=table.getSelectionIndex();
+      			        
+      			       if(table.getSelectionIndex()==x){
+      			    	   text.setText(sh.getCell(0,x).getContents());
+      			    	
+      			    	 text_1.setText(sh.getCell(12, x).getContents());
+      			    	 text_2.setText(sh.getCell(4, x).getContents());
+      			    	 text_3.setText(sh.getCell(5, x).getContents());
+      			    	 text_4.setText(sh.getCell(6, x).getContents());
+      			    	text_5.setText(sh.getCell(7, x).getContents());
+      			    	text_6.setText(sh.getCell(8, x).getContents());
+      			    	text_7.setText(sh.getCell(9, x).getContents());
+      			    	text_8.setText(sh.getCell(10, x).getContents());
+      			    	text_9.setText(sh.getCell(11, x).getContents());
+      			   	
+      			   
+      			    	   
+      			       }
+      			      
+      			       }
+      			    });
+        			
+        			/* table.addListener(SWT.Selection, new Listener()
+        			    {
+        			        @Override
+        			        public void handleEvent(Event e)
+        			        {
+        			            System.out.println("click");
+        			        }
+        			    });*/
+        			    
+    }   
+              
+   
+    table.addListener(SWT.MenuDetect, new Listener()
+    {
+        @Override
+        public void handleEvent(Event e)
+        {
+            System.out.println("menu");
+            
+            
+            /** create a pop up[ window here  */
+            Shell shell2=new Shell();
+        
+            
+           MessageBox m=new MessageBox(shell2,SWT.YES|SWT.NO);
+           m.setMessage("Do you want to add a new Cardmember?");
+          int choice= m.open();
+      Text text_10;
+	Text text_11;
+	Text text_21;
+	Text text_31;
+	Text text_41;
+	Control text_51;
+	Control text_61;
+	Text text_71;
+	Text text_81;
+	Text text_91;
+	final Shell sss=new Shell();
+	  sss.getParent();
+	switch(choice){
+	
+      case SWT.YES:
+    	    
+    	  
+    		
+    		Label lblName = new Label(sss, SWT.NONE);
+    		lblName.setBounds(10, 20, 66, 15);
+    		lblName.setText("First Name");
+    		
+    		Label lblNewLabel = new Label(sss, SWT.NONE);
+    		lblNewLabel.setBounds(10, 41, 66, 15);
+    		lblNewLabel.setText("Last Name");
+    		
+    		Label lblType = new Label(sss, SWT.NONE);
+    		lblType.setBounds(10, 62, 55, 15);
+    		lblType.setText("Type");
+    		
+    		Label lblStreet = new Label(sss, SWT.NONE);
+    		lblStreet.setText("Street");
+    		lblStreet.setBounds(10, 85, 55, 15);
+    		
+    		Label lblCity = new Label(sss, SWT.NONE);
+    		lblCity.setText("City");
+    		lblCity.setBounds(10, 106, 55, 15);
+    		
+    		Label lblZip = new Label(sss, SWT.NONE);
+    		lblZip.setText("ZIP");
+    		lblZip.setBounds(10, 127, 55, 15);
+    		
+    		Label lblState = new Label(sss, SWT.NONE);
+    		lblState.setText("State");
+    		lblState.setBounds(10, 148, 55, 15);
+    		
+    		Label lblMmn = new Label(sss, SWT.NONE);
+    		lblMmn.setText("MMN");
+    		lblMmn.setBounds(10, 169, 55, 15);
+    		
+    		Label lblDob = new Label(sss, SWT.NONE);
+    		lblDob.setText("DOB");
+    		lblDob.setBounds(208, 20, 55, 15);
+    		
+    		Label lblSsn = new Label(sss, SWT.NONE);
+    		lblSsn.setText("SSN");
+    		lblSsn.setBounds(208, 41, 55, 15);
+    		
+    		Label lblPhone = new Label(sss, SWT.NONE);
+    		lblPhone.setText("Phone");
+    		lblPhone.setBounds(208, 62, 55, 15);
+    		
+    		text = new Text(sss, SWT.BORDER);
+    		text.setBounds(82, 14, 76, 21);
+    		
+    		text_11 = new Text(sss, SWT.BORDER);
+    		text_11.setBounds(82, 35, 76, 21);
+    		
+    		text_21 = new Text(sss, SWT.BORDER);
+    		text_21.setBounds(82, 59, 76, 21);
+    		
+    		text_31 = new Text(sss, SWT.BORDER);
+    		text_31.setBounds(82, 82, 76, 21);
+    		
+    		text_41 = new Text(sss, SWT.BORDER);
+    		text_41.setBounds(82, 124, 76, 21);
+    		
+    		text_51 = new Text(sss, SWT.BORDER);
+    		text_51.setBounds(82, 148, 76, 21);
+    		
+    		text_61 = new Text(sss, SWT.BORDER);
+    		text_61.setBounds(82, 169, 76, 21);
+    		
+    		text_71 = new Text(sss, SWT.BORDER);
+    		text_71.setBounds(253, 20, 76, 21);
+    		
+    		text_81 = new Text(sss, SWT.BORDER);
+    		text_81.setBounds(253, 41, 76, 21);
+    		
+    		text_91 = new Text(sss, SWT.BORDER);
+    		text_91.setBounds(253, 62, 76, 21);
+    		
+    		text_10 = new Text(sss, SWT.BORDER);
+    		text_10.setBounds(82, 100, 76, 21);
+    		
+    		Button btnSubmit = new Button(sss, SWT.NONE);
+    		btnSubmit.setBounds(97, 227, 75, 25);
+    		btnSubmit.setText("SUBMIT");
+    		
+    		Button btnCancel = new Button(sss, SWT.NONE);
+    		btnCancel.setBounds(188, 227, 75, 25);
+    		btnCancel.setText("CANCEL");
+    		btnCancel.addSelectionListener(new SelectionAdapter() {
+    			@Override
+    			public void widgetSelected(SelectionEvent arg0) {
+    				
+    				sss.close();
+    			}
+    		});
+    		
+    		
+    	    sss.open();	
+    	  
+    	  
+    	  break;
+    	  
+    	  
+    	  
+      case SWT.NO:
+    	            sss.close();
+    	            
+    	  break;
+      }
+           
+           
+           
+           
+           
+        }
+    });
+		
+		
+				
+		TabItem tbtmMaterials = new TabItem(tabFolder, SWT.NONE);
+		tbtmMaterials.setText("Materials");
+		
+		Composite composite_2 = new Composite(tabFolder, SWT.NONE);
+		tbtmMaterials.setControl(composite_2);
+		
+		Composite composite_3 = new Composite(composite_2, SWT.NONE);
+		composite_3.setBounds(10, 306, 527, 35);
+		
+		Button btnSend = new Button(composite_3, SWT.NONE);
+		btnSend.setBounds(184, 0, 75, 35);
+		btnSend.setText("Send");
+		
+		Button btnCancel_1 = new Button(composite_3, SWT.NONE);
+		btnCancel_1.setBounds(259, 0, 75, 35);
+		btnCancel_1.setText("Cancel");
+		
+		
+		
+		
+		
+		Composite composite_4 = new Composite(composite_2, SWT.NONE);
+		composite_4.setBounds(348, 10, 189, 290);
+		
+		Label lblSelectCardmember = new Label(composite_4, SWT.NONE);
+		lblSelectCardmember.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblSelectCardmember.setBounds(10, 10, 144, 15);
+		lblSelectCardmember.setText("Select CardMember");
+		
+		Combo combo = new Combo(composite_4, SWT.NONE);
+		String[] items=new String[totalNoOfRows];
+		for(int i=0;i<totalNoOfRows;i++){
+			items[i]=sh.getCell(1,i).getContents()+","+sh.getCell(2,i).getContents();
+		}
+		
+		
+		//String[] items={"India","USA","France","Australia","London"};
+		combo.setItems(items);
+		combo.setBounds(10, 31, 144, 23);
+		int mycount=0;
+		ArrayList<String> al=new ArrayList<String>();
+		for ( int row= 0; row < totalNoOfRows; row++) {
+			
+			//String[] s={sh.getCell(1, mycount).getContents()};
+			al.add(sh.getCell(1, mycount).getContents());
+		//	combo.setItems(s);
+			mycount++;
+		}
+		System.out.println(al);
+		
+		Label lblSelectAddress = new Label(composite_4, SWT.NONE);
+		lblSelectAddress.setText("Select Address");
+		lblSelectAddress.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblSelectAddress.setBounds(10, 72, 144, 15);
+		
+		Button btnRadioButton = new Button(composite_4, SWT.RADIO);
+		btnRadioButton.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btnRadioButton.setBounds(10, 93, 109, 16);
+		btnRadioButton.setText("Physical Address");
+		
+		Button btnRadioButton_1 = new Button(composite_4, SWT.RADIO);
+		btnRadioButton_1.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_FOREGROUND));
+		btnRadioButton_1.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btnRadioButton_1.setBounds(10, 115, 124, 16);
+		btnRadioButton_1.setText("Business Address");
+		
+		Tree tree = new Tree(composite_2, SWT.BORDER);
+		tree.setBounds(10, 10, 332, 290);
+		
+	    TreeItem materials=new TreeItem(tree, SWT.NONE);
+	    materials.setText("Materials");
+	    
+	    TreeItem accmat=new TreeItem(materials, SWT.NONE);
+	    accmat.setText("Account Materilas");
+	    
+	    TreeItem addmt=new TreeItem(materials, SWT.NONE);
+	    addmt.setText("Additional Materials");
+		
+	    TreeItem stms =new TreeItem(accmat, SWT.NONE);
+	    stms.setText("Statement Back");
+	    
+	    TreeItem cbb =new TreeItem(accmat, SWT.NONE);
+	    cbb.setText("CBB Partner Broucher");
+	    
+	    
+	    TreeItem moreApp =new TreeItem(addmt, SWT.NONE);
+	    moreApp.setText("More Application");
+	    
+	    TreeItem open =new TreeItem(addmt, SWT.NONE);
+	    open.setText("Open ROAD Application");
+	    
+	    TabItem tbtmSalaryDetails = new TabItem(tabFolder, SWT.NONE);
+	    tbtmSalaryDetails.setText("Salary Details");
+	    final String fileName = "C:/Users/sucmisra/SwingExcercise/Test.txt";
+		List<String> amountDetails=new ArrayList<String>();
+		StringBuffer sBuf = new StringBuffer();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
+	        String line;
+	        
+	        while((line = br.readLine()) != null) {
+	        	amountDetails.add(line);
+	        	List<String> basic=amountDetails;
+	        	if(amountDetails.size()>2)
+	        		break;
+	        }
+	        br.close();
+		} catch (IOException e) {
+			System.out.println("readFromFile problem:");
+			e.printStackTrace();
+		}
+		
+		System.out.println(amountDetails);
+		System.out.println(amountDetails.size());
+	
+	
+	    
+	    
+	    Composite composite_5 = new Composite(tabFolder, SWT.NONE);
+	    tbtmSalaryDetails.setControl(composite_5);
+	    
+	    Label lblNewLabel_2 = new Label(composite_5, SWT.NONE);
+	    lblNewLabel_2.setBounds(24, 32, 55, 15);
+	    lblNewLabel_2.setText("Basic");
+	    
+	    Label lblNewLabel_3 = new Label(composite_5, SWT.NONE);
+	    lblNewLabel_3.setBounds(24, 71, 55, 15);
+	    lblNewLabel_3.setText("HRA");
+	    
+	    Label lblNewLabel_4 = new Label(composite_5, SWT.NONE);
+	    lblNewLabel_4.setBounds(24, 121, 96, 15);
+	    lblNewLabel_4.setText("Professional Tax");
+	    
+	    text_12 = new Text(composite_5, SWT.BORDER);
+	    text_12.setBounds(155, 32, 150, 21);
+	   
+	    text_13 = new Text(composite_5, SWT.BORDER);
+	    text_13.setBounds(155, 71, 150, 21);
+	    
+	    text_14 = new Text(composite_5, SWT.BORDER);
+	    text_14.setBounds(155, 121, 150, 21);
+	    
+	    Button btnNewButton_3 = new Button(composite_5, SWT.NONE);
+	    btnNewButton_3.setBounds(24, 223, 96, 25);
+	    btnNewButton_3.setText("Calc Final Salary");
+	    
+	    text_16 = new Text(composite_5, SWT.BORDER);
+	    text_16.setBounds(155, 225, 150, 21);
+	    
+	    Composite composite_6 = new Composite(composite_5, SWT.NONE);
+	    composite_6.setBounds(140, 272, 211, 41);
+	    
+	    Button btnNewButton_4 = new Button(composite_6, SWT.NONE);
+	    btnNewButton_4.setBounds(62, 10, 75, 25);
+	    btnNewButton_4.setText("Submit");
+	    
+	    Label lblIncomeTax = new Label(composite_5, SWT.NONE);
+	    lblIncomeTax.setBounds(24, 157, 83, 21);
+	    lblIncomeTax.setText("Income Tax");
+	    
+	    text_15 = new Text(composite_5, SWT.BORDER);
+	    text_15.setBounds(155, 157, 150, 21);
+	    
+	    
+	    
+		shell.open();
+		
+		shell.open();
+	    while (!shell.isDisposed()) {
+	        if (!display.readAndDispatch())
+	            display.sleep();
+	    }
+	    
+	    display.dispose();
+		}
+	
+	
+	public static void main(String[] args) throws IOException, BiffException {
+		
+		WindowDisplay w=new WindowDisplay();
+		w.window();
+
+	}
+}
